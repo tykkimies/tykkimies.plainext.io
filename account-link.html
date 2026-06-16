@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Link plAInext — Alexa Setup</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #1a1f2e;
+      border: 1px solid #2d3448;
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+    }
+
+    .logo-text { font-size: 18px; font-weight: 600; color: #f1f5f9; }
+    .logo-sub { font-size: 11px; color: #64748b; margin-top: 1px; }
+
+    h1 { font-size: 20px; font-weight: 600; color: #f1f5f9; margin-bottom: 8px; }
+    p { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 24px; }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: #2d3448;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .divider { border: none; border-top: 1px solid #2d3448; margin: 24px 0; }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      background: #0f1117;
+      border: 1px solid #2d3448;
+      border-radius: 6px;
+      color: #e2e8f0;
+      font-size: 13px;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    input[type="url"]::placeholder { color: #3d4a63; }
+    input[type="url"]:focus { border-color: #6366f1; }
+
+    .hint { font-size: 12px; color: #4a5568; margin-top: 6px; margin-bottom: 0; }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      background: #6366f1;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 11px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+
+    button:hover { background: #4f46e5; }
+    button:disabled { background: #3d3f6b; cursor: not-allowed; }
+
+    .error {
+      margin-top: 14px;
+      background: #2d1515;
+      border: 1px solid #7f1d1d;
+      border-radius: 6px;
+      color: #fca5a5;
+      font-size: 13px;
+      padding: 10px 12px;
+      display: none;
+    }
+
+    .success {
+      margin-top: 14px;
+      background: #0d2b1e;
+      border: 1px solid #14532d;
+      border-radius: 6px;
+      color: #86efac;
+      font-size: 13px;
+      padding: 10px 12px;
+      display: none;
+    }
+
+    .no-params {
+      background: #2a1a00;
+      border: 1px solid #78350f;
+      border-radius: 8px;
+      color: #fde68a;
+      font-size: 13px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: none;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-icon">pl</div>
+      <div>
+        <div class="logo-text">plAInext</div>
+        <div class="logo-sub">Alexa Account Linking</div>
+      </div>
+    </div>
+
+    <div class="no-params" id="no-params">
+      This page should be opened by the Alexa app during skill setup, not directly. If you're testing, open it from the Alexa app by enabling the skill and tapping "Link Account".
+    </div>
+
+    <h1>Link your plAInext server</h1>
+    <p>Paste your Command URL below. You can find it on the Voice Setup page inside your plAInext instance.</p>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>Sign in to your plAInext instance and open <strong>Voice → Alexa Setup</strong>.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>Copy the <strong>Command URL</strong> shown on that page.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>Paste it below and tap <strong>Link Account</strong>.</div>
+    </div>
+
+    <hr class="divider">
+
+    <label for="cmd-url">Command URL</label>
+    <input
+      type="url"
+      id="cmd-url"
+      placeholder="https://your-server.com/plainext/command?token=..."
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="none"
+      spellcheck="false"
+    >
+    <p class="hint">Includes your personal token — keep it private.</p>
+
+    <button id="link-btn" type="button">Link Account</button>
+
+    <div class="error" id="error"></div>
+    <div class="success" id="success">Linked! Returning to the Alexa app…</div>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var redirectUri = params.get('redirect_uri');
+      var state = params.get('state');
+
+      if (!redirectUri) {
+        document.getElementById('no-params').style.display = 'block';
+      }
+
+      document.getElementById('link-btn').addEventListener('click', function () {
+        var input = document.getElementById('cmd-url');
+        var errorEl = document.getElementById('error');
+        var successEl = document.getElementById('success');
+        var btn = document.getElementById('link-btn');
+
+        errorEl.style.display = 'none';
+        successEl.style.display = 'none';
+
+        var raw = input.value.trim();
+        if (!raw) {
+          errorEl.textContent = 'Please paste your Command URL.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        try { new URL(raw); } catch (_) {
+          errorEl.textContent = 'That doesn\'t look like a valid URL. Make sure you copied the full Command URL including https://.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        if (!redirectUri) {
+          errorEl.textContent = 'Missing redirect_uri — open this page from the Alexa app, not directly.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        var accessToken = btoa(raw);
+        var dest = redirectUri
+          + '#access_token=' + encodeURIComponent(accessToken)
+          + '&token_type=Bearer'
+          + '&state=' + encodeURIComponent(state || '');
+
+        btn.disabled = true;
+        successEl.style.display = 'block';
+        setTimeout(function () { window.location.href = dest; }, 800);
+      });
+    })();
+  </script>
+</body>
+</html>
